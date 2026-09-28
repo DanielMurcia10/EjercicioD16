@@ -1,0 +1,141 @@
+/* estilos de la interfaz web del sistema de gestion de empleados */
+:root {
+  --fondo: #f5f6f8;
+  --superficie: #ffffff;
+  --texto: #1d2330;
+  --texto-suave: #5b6475;
+  --borde: #dde1e8;
+  --primario: #2457c5;
+  --primario-texto: #ffffff;
+  --peligro: #c23a3a;
+  --exito-fondo: #e6f4ea;
+  --exito-texto: #1e6b35;
+  --error-fondo: #fbe9e9;
+  --error-texto: #9b2c2c;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #14171d;
+    --superficie: #1d2129;
+    --texto: #e6e9ef;
+    --texto-suave: #a0a8b8;
+    --borde: #313744;
+    --primario: #6b9bff;
+    --primario-texto: #0e1420;
+    --peligro: #ff7b7b;
+    --exito-fondo: #173524;
+    --exito-texto: #8fdca8;
+    --error-fondo: #3a1d1d;
+    --error-texto: #ffaaaa;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+a { color: var(--primario); }
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borde);
+}
+.marca { font-weight: 700; font-size: 1.1rem; color: var(--texto); text-decoration: none; }
+.barra nav { display: flex; gap: 16px; align-items: center; }
+
+main { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 1.6rem; margin: 0 0 20px; }
+h2 { font-size: 1.1rem; margin: 24px 0 12px; }
+
+/* botones */
+button, .boton {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--primario);
+  border-radius: 6px;
+  background: var(--primario);
+  color: var(--primario-texto);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover, .boton:hover { filter: brightness(1.08); }
+.secundario { background: transparent; color: var(--primario); }
+button.peligro, .boton.peligro { background: var(--peligro); border-color: var(--peligro); color: #fff; }
+a.peligro { color: var(--peligro); }
+.botones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+/* avisos */
+.aviso { padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+.aviso-exito { background: var(--exito-fondo); color: var(--exito-texto); }
+.aviso-error { background: var(--error-fondo); color: var(--error-texto); }
+.vacio { color: var(--texto-suave); padding: 16px 0; }
+
+/* buscadores de la pagina principal */
+.buscadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.buscador { background: var(--superficie); border: 1px solid var(--borde); border-radius: 8px; padding: 12px 14px; }
+.buscador label { display: block; font-weight: 600; margin-bottom: 6px; }
+.fila { display: flex; gap: 8px; flex-wrap: wrap; }
+.fila input { flex: 1; min-width: 0; }
+
+/* campos */
+input[type="text"], input[type="email"], input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+}
+input:focus { outline: 2px solid var(--primario); outline-offset: 1px; }
+
+/* tabla de empleados (se desplaza por dentro en pantallas pequenas) */
+.tabla-contenedor { overflow-x: auto; background: var(--superficie); border: 1px solid var(--borde); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+th { font-size: 0.85rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.03em; }
+tbody tr:last-child td { border-bottom: none; }
+.numero { text-align: right; font-variant-numeric: tabular-nums; }
+.acciones a { margin-right: 10px; }
+
+/* formulario de agregar / editar */
+.formulario, .tarjeta, .ficha section {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 16px;
+}
+.rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 20px; }
+.campo label { display: block; font-weight: 600; margin-bottom: 4px; }
+.con-error input { border-color: var(--peligro); }
+.error { color: var(--peligro); font-size: 0.9rem; margin: 4px 0 0; }
+.comision { margin: 20px 0 0; border: 1px solid var(--borde); border-radius: 8px; padding: 12px 14px; }
+.comision legend { font-weight: 600; padding: 0 6px; }
+.casilla { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+/* el porcentaje solo se muestra si esta marcada la casilla de comision */
+.formulario:not(:has(#recibe_comision:checked)) .campo-porcentaje { display: none; }
+
+/* ficha del empleado */
+.ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.ficha h2 { margin-top: 0; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0; }
+dt { color: var(--texto-suave); }
+dd { margin: 0; overflow-wrap: anywhere; }
+.montos dd { text-align: right; font-variant-numeric: tabular-nums; }
+.total { font-weight: 700; color: var(--texto); border-top: 1px solid var(--borde); padding-top: 8px; }

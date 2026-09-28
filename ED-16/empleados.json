@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nombre": "Daniel",
+    "edad": 22,
+    "salario": 400.0,
+    "AnioIngreso": 2022,
+    "TiempoTrabajando": 4,
+    "email": "dmurcia@gmail.com",
+    "rol": "contador",
+    "horas_por_dia": 8.0,
+    "vacaciones_anuales": 15,
+    "bonos": 25.0,
+    "recibe_comision": false,
+    "porcentaje_comision": 0.0
+  }
+]
